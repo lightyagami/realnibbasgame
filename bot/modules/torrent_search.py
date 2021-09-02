@@ -297,6 +297,11 @@ RESULT_STR_RARBG = (
     "➲Size: {Size}\n"
     "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
 )
+RESULT_STR_ETTV = (
+    "➲Name: `{Name}`\n"
+    "➲Size: {Size}\n"
+    "➲Seeders: {Seeders} || ➲Leechers: {Leechers}"
+)
 RESULT_STR_ALL = (
     "➲Name: `{Name}`\n"
     "➲Size: {Size}\n"
@@ -311,6 +316,7 @@ torrents_dict = {
     'eztv': {'source': "https://Torrents-Api.solidusnake.repl.co/api/eztv/", 'result_str': RESULT_STR_EZTV},
     'torlock': {'source': "https://Torrents-Api.solidusnake.repl.co/api/torlock/", 'result_str': RESULT_STR_TORLOCK},
     'rarbg': {'source': "https://Torrents-Api.solidusnake.repl.co/api/rarbg/", 'result_str': RESULT_STR_RARBG},
+    'ettv': {'source': "https://Torrents-Api.solidusnake.repl.co/api/ettv/", 'result_str': RESULT_STR_ETTV},
     'ts': {'source': "https://Torrents-Api.solidusnake.repl.co/api/all/", 'result_str': RESULT_STR_ALL}
 }
 

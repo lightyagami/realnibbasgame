@@ -1,4 +1,4 @@
-## Deploying Venomsnake on Heroku with Github Workflows.
+## Deploying VenomSnake on Heroku with Github Workflows.
 
 ## Pre-requisites
 
@@ -9,13 +9,13 @@
 
 ## Deployment
 
-1. Fork this repo then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL** (**NOTE**: If you don't upload **token.pickle** uploading will not work).
+1. Fork this repository then upload **token.pickle** to your forks, or you can upload your **token.pickle** to your Index and put your **token.pickle** link to **TOKEN_PICKLE_URL** (**NOTE**: If you don't upload **token.pickle** uploading will not work).
 
 2. Go to Repository `Settings` -> `Secrets`
 
 	![secrets](https://telegra.ph/file/bb8cb0eced5caad68a41b.jpg)
 
-3. Add the below Required Variables one by one by clicking `New Repository Secret` everytime.
+3. Add the below Required Variables one by one by clicking `New Repository Secret` every time .
 
 - To get CONFIG_FILE_URL, check the steps here:
 	* `HEROKU_EMAIL` Heroku Account email Id in which the above app will be deployed
@@ -29,9 +29,9 @@
 
     ![step 5](https://telegra.ph/file/416a550f7ded579b63272.jpg) 
 
-4. After adding all the above Required Variables go to Github Actions tab in your repo
+4. After adding all the above Required Variables go to Github Actions tab in your repository
 
-5. Select `Manually Deploy to heroku` workflow as shown below:
+5. Select `Manually Deploy to Heroku` workflow as shown below:
 
 	![Example Manually Deploy to Heroku](https://telegra.ph/file/38ffda0165d9671f1d5dc.jpg)
 

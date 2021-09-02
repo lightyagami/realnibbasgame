@@ -5,7 +5,7 @@
 import os
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from bot import app, bot
+from bot import app
 from bot.helper.telegram_helper.bot_commands import BotCommands
 from bot.helper import post_to_telegraph, runcmd, safe_filename
 
@@ -48,7 +48,7 @@ async def mediainfo(client, message):
 <h2>DETAILS</h2>
 <pre>{out or 'Not Supported'}</pre>
 """
-    title = f"Slam Mirror Bot Mediainfo"
+    title = f"VenomSnake Mirror Bot Mediainfo"
     text_ = media_type.split(".")[-1].upper()
     link = post_to_telegraph(title, body_text)
     markup = InlineKeyboardMarkup([[InlineKeyboardButton(text=text_, url=link)]])

@@ -14,7 +14,7 @@ from git.exc import GitCommandError, InvalidGitRepositoryError, NoSuchPathError
 from pyrogram import filters
 
 from bot import app, OWNER_ID, UPSTREAM_REPO, UPSTREAM_BRANCH, bot
-from bot.helper import HEROKU_URL
+from bot.helper import get_text, HEROKU_URL
 from bot.helper.telegram_helper.bot_commands import BotCommands
 
 REPO_ = UPSTREAM_REPO
@@ -31,13 +31,13 @@ def gen_chlog(repo, diff):
 
 @app.on_message(filters.command([BotCommands.UpdateCommand, f'{BotCommands.UpdateCommand}@{bot.username}']) & filters.user(OWNER_ID))
 async def update_it(client, message):
-    msg_ = await message.reply_text("`Updating Please Wait!`")
-    text = message.text.split(None, 1)[1]
+    msg_ = await message.reply_text("`Updating Bot with Latest Changes, Please Wait!!`")
+    text = get_text(message)
     try:
         repo = Repo()
     except GitCommandError:
         return await msg_.edit(
-            "**Invalid Git Command. Please Report This Bug To [Support Group](https://t.me/SlamMirrorSupport)**"
+            "**Invalid Git Command. Please Report This Bug To [Github](https://github.com/venomsnake/vhascometo/issues/new)**"
         )
     except InvalidGitRepositoryError:
         repo = Repo.init()
@@ -72,8 +72,7 @@ async def update_it(client, message):
                 ups_rem.pull(UPSTREAM_BRANCH)
             except GitCommandError:
                 repo.git.reset("--hard", "FETCH_HEAD")
-            await subprocess.run(["pip3","install","--no-cache-dir","-r","requirements.txt"])
-            await msg_.edit("`Updated Sucessfully! Give Me Some Time To Restart!`")
+            await msg_.edit("`Updated Successfully! It Will Take Some Time To Restart!`")
             with open("./aria.sh", 'rb') as file:
                 script = file.read()
             subprocess.call("./aria.sh", shell=True)
@@ -93,7 +92,7 @@ async def update_it(client, message):
             except BaseException as error:
                 await msg_.edit(f"**Updater Error** \nTraceBack : `{error}`")
                 return repo.__del__()
-            await msg_.edit(f"`Updated Sucessfully! \n\nCheck your config with` `/{BotCommands.ConfigMenuCommand}`")
+            await msg_.edit(f"`Updated Successfully! \n\nCheck your config with` `/{BotCommands.ConfigMenuCommand}`")
     else:
         await msg_.edit(f"**New Update Available**\n\nFrom [REPO]({REPO_})\nCHANGELOG:\n\n{clogs}\n\nDo `/update now` to Update BOT.", parse_mode="Markdown",disable_web_page_preview=True)
         return
