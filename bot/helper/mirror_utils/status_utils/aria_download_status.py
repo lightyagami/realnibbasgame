@@ -11,15 +11,11 @@ class AriaDownloadStatus(Status):
     def __init__(self, gid, listener):
         super().__init__()
         self.upload_name = None
-        self.is_archiving = False
         self.__gid = gid
         self.__download = get_download(self.__gid)
         self.__uid = listener.uid
         self.__listener = listener
         self.message = listener.message
-        self.last = None
-        self.is_waiting = False
-        self.is_extracting = False
 
     def __update(self):
         self.__download = get_download(self.__gid)
@@ -95,6 +91,9 @@ class AriaDownloadStatus(Status):
             return
         if len(download.followed_by_ids) != 0:
             downloads = aria2.get_downloads(download.followed_by_ids)
+            self.__listener.onDownloadError('Download stopped by user!')
             aria2.remove(downloads, force=True)
+            aria2.remove([download], force=True)
+            return
         self.__listener.onDownloadError('Download stopped by user!')
         aria2.remove([download], force=True)

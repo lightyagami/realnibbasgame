@@ -1,14 +1,16 @@
 ![Snake](https://telegra.ph/file/3eadd386697205a815e87.png)
 
 
-**Snake Mirror Bot** is a _multipurpose_ Telegram Bot written in Python for mirroring files from the Internet to Google Drive.
+**Snake Mirror Bot** is a _multipurpose_ Telegram Bot written in Python for mirroring/uploading files from the Internet to Google Drive.
 
 # Features:
 <details>
-    <summary><b>Click Here to check the list of features </b></summary>
+    <summary><b>Click here to check the features </b></summary>
 
-## Major features
+## Features
 - qBittorrent
+- Leech Supported
+- Thumbnail Support
 - Size limiting for Torrent/Direct, Tar/Unzip, Mega and clone
 - Stop duplicates for all tasks except for qBittorrent and youtube-dl tasks 
 - Tar/Unzip G-Drive link 
@@ -22,7 +24,7 @@
 - Speedtest
 - Status Pages for unlimited tasks
 - Clone status
-- Search in multiple Drive folder/TD
+- Search in Mltiple Drive folder/TD
 - Many bugs has been fixed
 - Torrent search Supported:
 ```
@@ -37,8 +39,9 @@ sbplay.org, naniplay.com, naniplay.nanime.in, naniplay.nanime.biz, sbembed.com,
 streamtape.com, streamsb.net, feurl.com, pixeldrain.com, racaty.net,
 1fichier.com, 1drv.ms (Only works for file not folder or business account),
 uptobox.com (Uptobox account must be premium), solidfiles.com
+
 ```
-## From Original Repos
+## From Original and Other Repositories
 - Mirroring direct download links, Torrent, and Telegram files to Google Drive
 - Mirroring Mega.nz links to Google Drive (If your Mega account not premium, it will limit 5GB/6 hours)
 - Copy files from someone's Drive to your Drive (Using Autorclone)
@@ -68,7 +71,7 @@ NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 Deploying is pretty much straight forward and is divided into several steps as follows:
 ## Installing requirements
 
-- Clone this repo:
+- Clone this repository:
 ```
 git clone https://github.com/venomsnake/vhascometo
 
@@ -344,4 +347,4 @@ Thanks to:
 - [`breakdowns`](https://github.com/breakdowns) for slam-mirrorbot
 - [`zevtyardt`](https://github.com/zevtyardt) for some direct links
 - [`yash-dk`](https://github.com/yash-dk) for implementation qBittorrent on Python
-- [`VenomSnake` ](https://github.com/venomsnake) for Snake Mirror bot
+- [`VenomSnake`](https://github.com/venomsnake) for Snake Mirror bot
