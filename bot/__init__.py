@@ -164,7 +164,7 @@ except KeyError:
 if DB_URI is not None:
     try:
         conn = psycopg2.connect(DB_URI)
-        cur = conn.cursor()
+        cur = conn.Cursor()
         sql = "SELECT * from users;"
         cur.execute(sql)
         rows = cur.fetchall()  #returns a list ==> (uid, sudo)
