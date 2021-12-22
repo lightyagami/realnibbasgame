@@ -1,6 +1,5 @@
 import io
 import os
-# Common imports for eval
 import textwrap
 import traceback
 from contextlib import redirect_stdout
@@ -123,9 +122,10 @@ def clear(update, context):
 
 def exechelp(update, context):
     help_string = '''
-• <code>/eval</code> <i>Run Python Code Line | Lines</i>
-• <code>/exec</code> <i>Run Commands In Exec</i>
-• <code>/clearlocals</code> <i>Cleared locals</i>
+<b>Executor</b>
+• /eval <i>Run Python Code Line | Lines</i>
+• /exec <i>Run Commands In Exec</i>
+• /clearlocals <i>Cleared locals</i>
 '''
     sendMessage(help_string, context.bot, update)
 

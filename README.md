@@ -73,7 +73,7 @@ Deploying is pretty much straight forward and is divided into several steps as f
 
 - Clone this repository:
 ```
-git clone https://github.com/venomsnake/vhascometo
+git clone https://github.com/VenomSnake/vhascometo
 
 cd vhascometo
 ```

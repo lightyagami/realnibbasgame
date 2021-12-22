@@ -201,11 +201,11 @@ input[type="submit"]:hover, input[type="submit"]:focus{
           alt="logo"
         />
         <a href="https://t.me/telegram"> 
-          <h2 class="name">Snake-mirrorbot</h2>
+          <h2 class="name">Snake-Mirror Bot</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/Venomsnake/vhascometo"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
         <a href="https://t.me/telegram"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -526,11 +526,11 @@ section span{
           alt="logo"
         />
         <a href="https://t.me/telegram">
-          <h2 class="name">snake-mirrorbot</h2>
+          <h2 class="name">snake-Mirror Bot</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/venomsnake/vhascometo"><i class="fab fa-github"></i></a>
+        <a href="https://github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
         <a href="https://t.me/telegram"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -699,7 +699,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See vhascometo-mirrorbot <a href='https://github.com/venomsnake/vhascometo'>@GitHub</a> By <a href='https://github.com/venomsnake'>VenomSnake</a></h1>", content_type="text/html")
+    return web.Response(text="<h1>See vhascometo-Mirror Bot <a href='https://github.com/VenomSnake/vhascometo'>@GitHub</a> By <a href='https://github.com/VenomSnake'>VenomSnake</a></h1>", content_type="text/html")
 
 
 async def e404_middleware(app, handler):
