@@ -9,19 +9,15 @@ than the modifications. See https://github.com/AvinashReddy3108/PaperplaneExtend
 for original authorship. """
 
 import json
-import math
 import re
 import urllib.parse
 import lk21
 import requests
 import cfscrape
 
-from os import popen
-from random import choice
-from urllib.parse import urlparse
 from bs4 import BeautifulSoup
-from lk21.extractors.bypasser import Bypass
 from base64 import standard_b64encode
+from js2py import EvalJs
 
 from bot import LOGGER, UPTOBOX_TOKEN, PHPSESSID, CRYPT
 from bot.helper.telegram_helper.bot_commands import BotCommands
@@ -269,7 +265,7 @@ def sbembed(link: str) -> str:
 def onedrive(link: str) -> str:
     """ Onedrive direct link generator
     Based on https://github.com/UsergeTeam/Userge """
-    link_without_query = urlparse(link)._replace(query=None).geturl()
+    link_without_query = urllib.parse.urlparse(link)._replace(query=None).geturl()
     direct_link_encoded = str(standard_b64encode(bytes(link_without_query, "utf-8")), "utf-8")
     direct_link1 = f"https://api.onedrive.com/v1.0/shares/u!{direct_link_encoded}/root/content"
     resp = requests.head(direct_link1)

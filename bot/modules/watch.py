@@ -209,7 +209,7 @@ def select_format(update, context):
         else:
             playlist = False
         ydl = YoutubeDLHelper(listener)
-        threading.Thread(target=ydl.add_download,args=(link, f'{DOWNLOAD_DIR}{task_id}', name, qual, playlist)).start()
+        threading.Thread(target=ydl.add_download, args=(link, f'{DOWNLOAD_DIR}{task_id}', name, qual, playlist)).start()
     del listener_dict[task_id]
     query.message.delete()
 
