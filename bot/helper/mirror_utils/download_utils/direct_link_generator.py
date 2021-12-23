@@ -17,7 +17,6 @@ import cfscrape
 
 from bs4 import BeautifulSoup
 from base64 import standard_b64encode
-from js2py import EvalJs
 
 from bot import LOGGER, UPTOBOX_TOKEN, PHPSESSID, CRYPT
 from bot.helper.telegram_helper.bot_commands import BotCommands

@@ -43,7 +43,7 @@ def authorize(update, context):
             msg = 'User Already Authorized'
         elif DB_URI is not None:
             msg = DbManger().user_auth(user_id)
-            AUTHORIZED_CHATS.add(chat_id)
+            AUTHORIZED_CHATS.add(user_id)
         else:
             AUTHORIZED_CHATS.add(user_id)
             with open('authorized_chats.txt', 'a') as file:
