@@ -1,6 +1,5 @@
-import os
-import psycopg2
-from psycopg2 import Error
+from os import path as ospath, makedirs
+from psycopg2 import connect, DatabaseError
 
 from bot import DB_URI, AUTHORIZED_CHATS, SUDO_USERS, AS_DOC_USERS, AS_MEDIA_USERS, rss_dict, LOGGER
 
@@ -11,9 +10,9 @@ class DbManger:
 
     def connect(self):
         try:
-            self.conn = psycopg2.connect(DB_URI)
+            self.conn = connect(DB_URI)
             self.cur = self.conn.cursor()
-        except psycopg2.DatabaseError as error:
+        except DatabaseError as error:
             LOGGER.error(f"Error in DB connection: {error}")
             self.err = True
 
@@ -34,7 +33,15 @@ class DbManger:
               )
               """
         self.cur.execute(sql)
-        self.cur.execute("CREATE TABLE IF NOT EXISTS rss (name text, link text, last text, title text)")
+        sql = """CREATE TABLE IF NOT EXISTS rss (
+                 name text,
+                 link text,
+                 last text,
+                 title text,
+                 filters text
+              )
+              """
+        self.cur.execute(sql)
         self.conn.commit()
         LOGGER.info("Database Initiated")
         self.db_load()
@@ -54,19 +61,25 @@ class DbManger:
                 elif row[4]:
                     AS_DOC_USERS.add(row[0])
                 path = f"Thumbnails/{row[0]}.jpg"
-                if row[5] is not None and not os.path.exists(path):
-                    if not os.path.exists('Thumbnails'):
-                        os.makedirs('Thumbnails')
+                if row[5] is not None and not ospath.exists(path):
+                    if not ospath.exists('Thumbnails'):
+                        makedirs('Thumbnails')
                     with open(path, 'wb+') as f:
                         f.write(row[5])
                         f.close()
             LOGGER.info("Users data has been imported from Database")
         # Rss Data
         self.cur.execute("SELECT * FROM rss")
-        rows = self.cur.fetchall()  #returns a list ==> (name, feed_link, last_link, last_title)
+        rows = self.cur.fetchall()  #returns a list ==> (name, feed_link, last_link, last_title, filters)
         if rows:
             for row in rows:
-                rss_dict[row[0]] = [row[1], row[2], row[3]]
+                f_lists = []
+                if row[4] is not None:
+                    filters_list = row[4].split('|')
+                    for x in filters_list:
+                        y = x.split(' or ')
+                        f_lists.append(y)
+                rss_dict[row[0]] = [row[1], row[2], row[3], f_lists]
             LOGGER.info("Rss data has been imported from Database.")
         self.disconnect()
 
@@ -163,11 +176,11 @@ class DbManger:
         res = self.cur.fetchone()
         return res
 
-    def rss_add(self, name, link, last, title):
+    def rss_add(self, name, link, last, title, filters):
         if self.err:
             return
-        q = (name, link, last, title)
-        self.cur.execute("INSERT INTO rss (name, link, last, title) VALUES (%s, %s, %s, %s)", q)
+        q = (name, link, last, title, filters)
+        self.cur.execute("INSERT INTO rss (name, link, last, title, filters) VALUES (%s, %s, %s, %s, %s)", q)
         self.conn.commit()
         self.disconnect()
 
