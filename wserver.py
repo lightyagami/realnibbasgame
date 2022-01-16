@@ -622,7 +622,7 @@ async def list_torrent_contents(request):
                         username="admin", password="adminadmin")
     client.auth_log_in()
     try:
-    except qba.NotFound404Error:
+      except qba.NotFound404Error:
         raise web.HTTPNotFound()
     count = 0
     passw = ""
