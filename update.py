@@ -26,7 +26,7 @@ try:
         else:
             logging.error(f"Failed to download config.env {res.status_code}")
     except Exception as e:
-        logging.error(str(e))
+        logging.error(f"CONFIG_FILE_URL: {e}")
 except TypeError:
     pass
 
@@ -43,11 +43,10 @@ if os.path.exists('.git'):
     subprocess.run(["rm", "-rf", ".git"])
 
 subprocess.run([f"git init -q \
-                  && git config --global user.email e.anastayyar@gmail.com \
-                  && git config --global user.name mltb \
+                  && git config --global user.email thakurmark07@gmail.com \
+                  && git config --global user.name venomsnake \
                   && git add . \
                   && git commit -sm update -q \
                   && git remote add origin {UPSTREAM_REPO} \
                   && git fetch origin -q \
                   && git reset --hard origin/master -q"], shell=True)
-
