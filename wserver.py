@@ -618,33 +618,29 @@ async def list_torrent_contents(request):
         rend_page = code_page.replace("{form_url}", f"/snake/files/{torr}")
         return web.Response(text=rend_page, content_type='text/html')
 
-    client = qba.Client(host="localhost", port="8090",
-                        username="admin", password="adminadmin")
-    client.auth_log_in()
+    client = qba.Client(host="localhost", port="8090")
     try:
-      except qba.NotFound404Error:
+        res = client.torrents_files(torrent_hash=torr)
+    except qba.NotFound404Error:
         raise web.HTTPNotFound()
-    count = 0
     passw = ""
     for n in str(torr):
         if n.isdigit():
             passw += str(n)
-            count += 1
-        if count == 4:
+        if len(passw) == 4:
             break
     if isinstance(passw, bool):
         raise web.HTTPNotFound()
     pincode = passw
     if gets["pin_code"] != pincode:
         return web.Response(text="Incorrect pin code")
-
     par = nodes.make_tree(res)
 
     cont = ["", 0]
     nodes.create_list(par, cont)
 
     rend_page = page.replace("{My_content}", cont[0])
-        "{form_url}", f"/snake/files/{torr}?pin_code={pincode}")
+    rend_page = "{form_url}", f"/snake/files/{torr}?pin_code={pincode}")
     client.auth_log_out()
     return web.Response(text=rend_page, content_type='text/html')
 
