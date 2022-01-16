@@ -1,15 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # (c) YashDK [yash-dk@github]
+# Redesigned By - @bipuldey19 (https://github.com/SlamDevs/slam-mirrorbot/commit/1e572f4fa3625ecceb953ce6d3e7cf7334a4d542#diff-c3d91f56f4c5d8b5af3d856d15a76bd5f00aa38d712691b91501734940761bdd)
 
-import os
-import time
 import logging
 import qbittorrentapi as qba
 import asyncio
 
 from aiohttp import web
 import nodes
+
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                    handlers=[logging.FileHandler('log.txt'), logging.StreamHandler()],
+                    level=logging.INFO)
 
 LOGGER = logging.getLogger(__name__)
 
@@ -22,7 +25,7 @@ page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent File Selector</title>
-    <link rel="icon" href="https://telegra.ph/file/3eadd386697205a815e87.jpg" type="image/jpg">
+    <link rel="icon" href="href="https://telegra.ph/file/3eadd386697205a815e87.jpg" type="image/jpg">
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
@@ -78,7 +81,7 @@ header:hover, section:hover{
     align-items: center;
 }
 
-img{ 
+img{
     width: 2.5rem;
     height: 2.5rem;
     border: 2px solid black;
@@ -141,7 +144,7 @@ span{
 
 span.active{
     transform: rotate(90deg);
-    -ms-transform: rotate(90deg);    /* for IE  */
+    -ms-transform: rotate(90deg);	 /* for IE  */
     -webkit-transform: rotate(90deg);/* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
     display: inline-block;
 }
@@ -182,11 +185,11 @@ input[type="submit"]:hover, input[type="submit"]:focus{
         width: 100%;
     }
 }
-  
+
 #treeview .parent {
     position: relative;
 }
-  
+
 #treeview .parent > ul {
     display: none;
 }
@@ -198,15 +201,15 @@ input[type="submit"]:hover, input[type="submit"]:focus{
     <header>
       <div class="brand">
         <img
-          src="https://telegra.ph/file/3eadd386697205a815e87.jpg"
+          src="href="https://telegra.ph/file/3eadd386697205a815e87.jpg"
           alt="logo"
         />
-        <a href="https://t.me/telegram"> 
-          <h2 class="name">Snake-Mirror Bot</h2>
+        <a href="https://t.me/telegram">
+          <h2 class="name">Qbittorrent Selection</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
+        <a href="https://www.github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
         <a href="https://t.me/telegram"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -298,7 +301,7 @@ $('input[type="checkbox"]').change(function(e) {
       let returnValue = all = ($(this).children('input[type="checkbox"]').prop("checked") === checked);
       return returnValue;
     });
-    
+
     if (all && checked) {
       parent.children('input[type="checkbox"]').prop({
         indeterminate: false,
@@ -378,7 +381,7 @@ code_page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent Code Checker</title>
-    <link rel="icon" href="https://telegra.ph/file/3eadd386697205a815e87.jpg" type="image/jpg"> 
+    <link rel="icon" href="href="https://telegra.ph/file/3eadd386697205a815e87.jpg" type="image/jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -427,7 +430,7 @@ header:hover, section:hover{
     align-items: center;
 }
 
-img{ 
+img{
     width: 2.5rem;
     height: 2.5rem;
     border: 2px solid black;
@@ -574,15 +577,15 @@ section span{
     <header>
       <div class="brand">
         <img
-          src="https://telegra.ph/file/3eadd386697205a815e87.jpg"
+          src="href="https://telegra.ph/file/3eadd386697205a815e87.jpg"
           alt="logo"
         />
         <a href="https://t.me/telegram">
-          <h2 class="name">snake-Mirror Bot</h2>
+          <h2 class="name">Qbittorrent Selection</h2>
         </a>
       </div>
       <div class="social">
-        <a href="https://github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
+        <a href="https://www.github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
         <a href="https://t.me/telegram"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -606,16 +609,14 @@ section span{
 </html>
 """
 
-
-@routes.get('/snake/files/{hash_id}')
+@routes.get('/app/snake/{hash_id}')
 async def list_torrent_contents(request):
 
     torr = request.match_info["hash_id"]
-
     gets = request.query
 
     if "pin_code" not in gets.keys():
-        rend_page = code_page.replace("{form_url}", f"/snake/files/{torr}")
+        rend_page = code_page.replace("{form_url}", f"/app/snake/{torr}")
         return web.Response(text=rend_page, content_type='text/html')
 
     client = qba.Client(host="localhost", port="8090")
@@ -634,16 +635,15 @@ async def list_torrent_contents(request):
     pincode = passw
     if gets["pin_code"] != pincode:
         return web.Response(text="Incorrect pin code")
+
     par = nodes.make_tree(res)
 
     cont = ["", 0]
     nodes.create_list(par, cont)
-
     rend_page = page.replace("{My_content}", cont[0])
-    rend_page = "{form_url}", f"/snake/files/{torr}?pin_code={pincode}")
+    rend_page = rend_page.replace("{form_url}", f"/app/snake/{torr}?pin_code={pincode}")
     client.auth_log_out()
     return web.Response(text=rend_page, content_type='text/html')
-
 
 async def re_verfiy(paused, resumed, client, torr):
 
@@ -660,9 +660,7 @@ async def re_verfiy(paused, resumed, client, torr):
         verify = True
 
         for i in res:
-            if str(i.id) in paused:
-                if i.priority == 0:
-                    continue
+            if str(i.id) in paused and i.priority != 0:
                 verify = False
                 break
 
@@ -672,37 +670,31 @@ async def re_verfiy(paused, resumed, client, torr):
 
         if verify:
             break
-        LOGGER.error("Reverification Failed, correcting stuff...")
+        LOGGER.info("Reverification Failed: correcting stuff...")
         client.auth_log_out()
-        client = qba.Client(host="localhost", port="8090",
-                           username="admin", password="adminadmin")
-        client.auth_log_in()
+        await asyncio.sleep(1)
+        client = qba.Client(host="localhost", port="8090")
         try:
-            client.torrents_file_priority(
-                torrent_hash=torr, file_ids=paused, priority=0)
+            client.torrents_file_priority(torrent_hash=torr, file_ids=paused, priority=0)
         except:
             LOGGER.error("Errored in reverification paused")
         try:
-            client.torrents_file_priority(
-                torrent_hash=torr, file_ids=resumed, priority=1)
+            client.torrents_file_priority(torrent_hash=torr, file_ids=resumed, priority=1)
         except:
             LOGGER.error("Errored in reverification resumed")
-        client.auth_log_out()
         k += 1
-        if k > 4:
-                        client.auth_log_out()
-
+        if k > 5:
+            client.auth_log_out()
             return False
+    client.auth_log_out()
+    LOGGER.info("Verified")
     return True
 
-
-@routes.post('/snake/files/{hash_id}')
+@routes.post('/app/files/{hash_id}')
 async def set_priority(request):
 
     torr = request.match_info["hash_id"]
-    client = qba.Client(host="localhost", port="8090",
-                        username="admin", password="adminadmin")
-    client.auth_log_in()
+    client = qba.Client(host="localhost", port="8090")
 
     data = await request.post()
     resume = ""
@@ -722,16 +714,14 @@ async def set_priority(request):
     resume = resume.strip("|")
 
     try:
-        client.torrents_file_priority(
-            torrent_hash=torr, file_ids=pause, priority=0)
+        client.torrents_file_priority(torrent_hash=torr, file_ids=pause, priority=0)
     except qba.NotFound404Error:
         raise web.HTTPNotFound()
     except:
         LOGGER.error("Errored in paused")
 
     try:
-        client.torrents_file_priority(
-            torrent_hash=torr, file_ids=resume, priority=1)
+        client.torrents_file_priority(torrent_hash=torr, file_ids=resume, priority=1)
     except qba.NotFound404Error:
         raise web.HTTPNotFound()
     except:
@@ -739,16 +729,14 @@ async def set_priority(request):
 
     await asyncio.sleep(2)
     if not await re_verfiy(pause, resume, client, torr):
-        LOGGER.error("The Torrent choose errored reverification failed")
-    client.auth_log_out()
+        LOGGER.error("Verification Failed")
     return await list_torrent_contents(request)
 
 
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See vhascometo-Mirror Bot <a href='https://github.com/VenomSnake/vhascometo'>@GitHub</a> By <a href='https://github.com/VenomSnake'>VenomSnake</a></h1>", content_type="text/html")
-
+    return web.Response(text="<h1>See Snake-Mirror-Bot <a href='https://www.github.com/VenomSnake/vhascometo'>@GitHub</a> By <a href='https://github.com/VenomSnake'>VenomSnake</a></h1>", content_type="text/html")
 
 async def e404_middleware(app, handler):
 
@@ -757,14 +745,13 @@ async def e404_middleware(app, handler):
         try:
             response = await handler(request)
             if response.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>vhascometo</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>Snake-Mirror-Bot</h3>", content_type="text/html")
             return response
         except web.HTTPException as ex:
             if ex.status == 404:
-                return web.Response(text="<h1>404: Page not found</h2><br><h3>vhascometo</h3>", content_type="text/html")
+                return web.Response(text="<h1>404: Page not found</h2><br><h3>Snake-Mirror-Bot</h3>", content_type="text/html")
             raise
     return middleware_handler
-
 
 async def start_server():
 
@@ -772,8 +759,7 @@ async def start_server():
     app.add_routes(routes)
     return app
 
-
-async def start_server_async(port=8080):
+async def start_server_async(port=80):
 
     app = web.Application(middlewares=[e404_middleware])
     app.add_routes(routes)
