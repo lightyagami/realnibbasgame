@@ -1,6 +1,6 @@
 import itertools
-import qbittorrentapi as qba
 
+from qbittorrentapi import SearchAPIMixIn, Client as qbClient
 from requests import get as rget
 from time import sleep
 from threading import Thread
@@ -42,8 +42,8 @@ SITES = {
 
 SEARCH_LIMIT = 200
 
-def _srch_client() -> qba.SearchAPIMixIn:
-    return qba.Client(host="localhost", port=8090)
+def _srch_client() -> SearchAPIMixIn:
+    return qbClient(host="localhost", port=8090)
 
 def torser(update, context):
     user_id = update.message.from_user.id
@@ -184,7 +184,7 @@ def _getResult(search_results, key, message, tool):
 
     editMessage(f"<b>Creating</b> {len(telegraph_content)} <b>Telegraph pages.</b>", message)
     path = [telegraph.create_page(
-                title='Snake-Mirror-Bot Torrent Search',
+                title='Mirror-leech-bot Torrent Search',
                 content=content
             )["path"] for content in telegraph_content]
     sleep(0.5)
@@ -210,7 +210,7 @@ def _edit_telegraph(path, telegraph_content):
                 nxt_page += 1
         telegraph.edit_page(
             path = path[prev_page],
-            title = 'Snake-Mirror-Bot Torrent Search',
+            title = 'Mirror-leech-bot Torrent Search',
             content=content
         )
     return
