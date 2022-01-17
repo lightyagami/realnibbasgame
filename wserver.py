@@ -25,7 +25,7 @@ page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent File Selector</title>
-    <link rel="icon" href="href="https://telegra.ph/file/3eadd386697205a815e87.jpg" type="image/jpg">
+    <link rel="icon" href="https://telegra.ph/file/72c3a3710120e8c484783.png" type="image/jpg">
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
@@ -144,7 +144,7 @@ span{
 
 span.active{
     transform: rotate(90deg);
-    -ms-transform: rotate(90deg);	 /* for IE  */
+    -ms-transform: rotate(90deg);    /* for IE  */
     -webkit-transform: rotate(90deg);/* for browsers supporting webkit (such as chrome, firefox, safari etc.). */
     display: inline-block;
 }
@@ -201,7 +201,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
     <header>
       <div class="brand">
         <img
-          src="href="https://telegra.ph/file/3eadd386697205a815e87.jpg"
+          src="https://telegra.ph/file/72c3a3710120e8c484783.png"
           alt="logo"
         />
         <a href="https://t.me/telegram">
@@ -209,7 +209,7 @@ input[type="submit"]:hover, input[type="submit"]:focus{
         </a>
       </div>
       <div class="social">
-        <a href="https://www.github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
+        <a href="https://www.github.com/VenomSnake/Snake-Mirror-Bot"><i class="fab fa-github"></i></a>
         <a href="https://t.me/telegram"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -381,7 +381,7 @@ code_page = """
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torrent Code Checker</title>
-    <link rel="icon" href="href="https://telegra.ph/file/3eadd386697205a815e87.jpg" type="image/jpg">
+    <link rel="icon" href="https://telegra.ph/file/72c3a3710120e8c484783.png" type="image/jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -577,7 +577,7 @@ section span{
     <header>
       <div class="brand">
         <img
-          src="href="https://telegra.ph/file/3eadd386697205a815e87.jpg"
+          src="https://telegra.ph/file/72c3a3710120e8c484783.png"
           alt="logo"
         />
         <a href="https://t.me/telegram">
@@ -585,7 +585,7 @@ section span{
         </a>
       </div>
       <div class="social">
-        <a href="https://www.github.com/VenomSnake/vhascometo"><i class="fab fa-github"></i></a>
+        <a href="https://www.github.com/VenomSnake/Snake-Mirror-Bot"><i class="fab fa-github"></i></a>
         <a href="https://t.me/telegram"><i class="fab fa-telegram"></i></a>
       </div>
     </header>
@@ -690,7 +690,7 @@ async def re_verfiy(paused, resumed, client, torr):
     LOGGER.info("Verified")
     return True
 
-@routes.post('/app/files/{hash_id}')
+@routes.post('/app/snake/{hash_id}')
 async def set_priority(request):
 
     torr = request.match_info["hash_id"]
@@ -736,7 +736,7 @@ async def set_priority(request):
 @routes.get('/')
 async def homepage(request):
 
-    return web.Response(text="<h1>See Snake-Mirror-Bot <a href='https://www.github.com/VenomSnake/vhascometo'>@GitHub</a> By <a href='https://github.com/VenomSnake'>VenomSnake</a></h1>", content_type="text/html")
+    return web.Response(text="<h1>See Snake-Mirror-Bot <a href='https://www.github.com/VenomSnake/vhascometo'>@GitHub</a> By <a href='https://github.com/VenomSnake'>V</a></h1>", content_type="text/html")
 
 async def e404_middleware(app, handler):
 
